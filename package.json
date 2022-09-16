@@ -12,6 +12,7 @@
     "@sentry/vue": "^7.12.1",
     "buefy": "^0.9.21",
     "firebase": "^9.9.4",
+    "lodash": "^4.17.21",
     "vue": "^2.7.7",
     "vue-advanced-chat": "^2.0.3",
     "vue-router": "^3.5.4",

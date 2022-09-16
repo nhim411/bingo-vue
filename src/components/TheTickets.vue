@@ -4,7 +4,7 @@
       class="columns is-mobile is-centered is-justify-content-center is-align-items-center box"
       style="overflow-x: scroll"
     >
-      <template v-for="item in 20">
+      <template v-for="item in 10">
         <div class="column" :key="item">
           <div class="square"><TheTicketItem /></div>
         </div>
