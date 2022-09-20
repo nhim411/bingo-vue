@@ -53,6 +53,7 @@ Vue.use(Buefy);
 //   // We recommend adjusting this value in production
 //   tracesSampleRate: 1.0,
 // });
+
 new Vue({
   render: (h) => h(App),
   router,

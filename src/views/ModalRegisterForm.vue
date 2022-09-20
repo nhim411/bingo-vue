@@ -23,12 +23,30 @@
           />
         </b-field>
 
-        <b-field label="Password">
+        <b-field
+          label="Password"
+          :type="{ 'is-danger': isDiffPassword }"
+          :message="{ 'Password is not match': isDiffPassword }"
+        >
           <b-input
             v-model="password"
             type="password"
             password-reveal
             placeholder="Your password"
+            @change="isDiffPassword"
+            required
+          />
+        </b-field>
+        <b-field
+          label="Confirm Password"
+          :type="{ 'is-danger': isDiffPassword }"
+          :message="{ 'Password is not match': isDiffPassword }"
+        >
+          <b-input
+            v-model="confirmPassword"
+            type="password"
+            password-reveal
+            placeholder="Confirm password"
             required
           />
         </b-field>
@@ -49,9 +67,23 @@ export default {
       email: "",
       username: "",
       password: "",
+      confirmPassword: "",
     };
   },
-  methods: {},
+  computed: {
+    isDiffPassword() {
+      return this.password !== this.confirmPassword;
+    },
+  },
+  methods: {
+    register() {
+      this.$store.dispatch("signin", {
+        email: this.email,
+        username: this.username,
+        password: this.password,
+      });
+    },
+  },
 };
 </script>
 

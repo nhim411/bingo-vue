@@ -5,10 +5,10 @@
         <div class="column">
           <card-component title="Bingo" icon="gamepad-square">
             <form method="POST" @submit.prevent="submit">
-              <b-field label="username" icon="email-outline">
+              <b-field label="Email" icon="email-outline">
                 <b-input
-                  v-model="form.username"
-                  name="username"
+                  v-model="form.email"
+                  name="email"
                   type="text"
                   required
                 />
@@ -91,11 +91,23 @@ export default {
       isLoading: false,
       isComponentModalActive: false,
       form: {
-        username: "admin@admin",
-        password: "111111",
+        email: "lhnam411@gmail.com",
+        password: "4Thang11",
         remember: true,
       },
     };
+  },
+  methods: {
+    submit() {
+      try {
+        this.$store.dispatch("login", {
+          email: this.form.email,
+          password: this.form.password,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   computed: {},
 };

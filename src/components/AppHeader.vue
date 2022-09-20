@@ -30,7 +30,7 @@
       <div class="navbar-end is-flex-shrink-1">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-light"> Logout </a>
+            <a class="button is-light" @click="logout"> Logout </a>
           </div>
         </div>
       </div>
@@ -45,6 +45,11 @@ export default {
     return {
       logo,
     };
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+    },
   },
 };
 </script>

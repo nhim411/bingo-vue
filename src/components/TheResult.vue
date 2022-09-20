@@ -1,7 +1,51 @@
 <template>
   <section class="section">
-    <div class="columns box is-centered is-align-items-center">
-      <div class="cloumn"><span class="is-size-4">KQ:</span></div>
+    <div
+      class="columns box is-centered is-align-items-center is-flex-direction-column"
+    >
+      <div class="buttons">
+        <b-button
+          label="Buy Ticket"
+          type="is-info"
+          @click="isCardModalActive = true"
+        />
+      </div>
+      <b-modal v-model="isCardModalActive" :width="640" scroll="keep">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">Mua ticket</p>
+            <button class="card-header-icon" aria-label="more options">
+              <span class="icon">
+                <b-icon icon="ticket"> </b-icon>
+              </span>
+            </button>
+          </header>
+
+          <div class="card-content">
+            <b-field label="Số lượng vé" :label-position="labelPosition">
+              <b-numberinput
+                placeholder="99"
+                :min="0"
+                :max="10"
+                v-model="total"
+              ></b-numberinput>
+            </b-field>
+            <b-field label="Số coin đặt" :label-position="labelPosition">
+              <b-numberinput
+                placeholder="99"
+                :min="0"
+                :max="100"
+                v-model="coin"
+              ></b-numberinput>
+            </b-field>
+            <div class="content">Tổng: {{ getTotalCoin }}</div>
+            <div class="buttons is-justify-content-flex-end">
+              <b-button type="is-info" icon-right="bitcoin"> Buy </b-button>
+            </div>
+          </div>
+        </div>
+      </b-modal>
+      <div class="cloumn"><span class="is-size-4">Kết quả quay số:</span></div>
       <div class="column">
         <nav
           class="pagination is-rounded"
@@ -53,6 +97,18 @@
 <script>
 export default {
   name: "TheResult",
+  data() {
+    return {
+      isCardModalActive: false,
+      total: 0,
+      coin: 0,
+    };
+  },
+  computed: {
+    getTotalCoin() {
+      return this.total * this.coin;
+    },
+  },
 };
 </script>
 
