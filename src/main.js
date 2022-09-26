@@ -1,6 +1,7 @@
 /* Core */
 import Vue from "vue";
 import Buefy from "buefy";
+
 // import * as Sentry from "@sentry/vue";
 // import { BrowserTracing } from "@sentry/tracing";
 
@@ -29,8 +30,6 @@ import App from "./App.vue";
 // };
 // firebase.initializeApp(firebaseConfig);
 
-Vue.use(Buefy);
-
 // Sentry.init({
 //   Vue,
 //   dsn: "https://41b887ea35a34a3cb583d441732dd4ea@o296442.ingest.sentry.io/6745692",
@@ -53,7 +52,22 @@ Vue.use(Buefy);
 //   // We recommend adjusting this value in production
 //   tracesSampleRate: 1.0,
 // });
+import VueSocketIO from "vue-socket.io";
+import SocketIO from "socket.io-client";
 
+Vue.use(
+  new VueSocketIO({
+    debug: true,
+    connection: SocketIO("http://localhost:1337", {
+      transports: ["websocket"],
+      extraHeaders: {
+        Authorization: localStorage.getItem("jwt"),
+      },
+    }),
+  })
+);
+
+Vue.use(Buefy);
 new Vue({
   render: (h) => h(App),
   router,
