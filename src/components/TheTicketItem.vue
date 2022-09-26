@@ -7,7 +7,7 @@
         <div
           v-if="index === 12"
           class="column is-one-fifth ticket__item"
-          :key="index"
+          :key="index + 'center'"
         >
           <div class="">
             <!-- <img src="@/assets/logomenu.png" class="ticket__img" alt="logo" /> -->

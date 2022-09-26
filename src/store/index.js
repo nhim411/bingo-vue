@@ -8,11 +8,13 @@ Vue.use(Vuex);
 
 const getDefaultState = () => {
   return {
-    userId: 1,
-    email: "tam@gmail.com",
-    username: "TamHT",
-    role: 0,
-    amount: 900000.0,
+    user: {
+      userId: 1,
+      email: "tam@gmail.com",
+      username: "TamHT",
+      role: 0,
+      amount: 900000.0,
+    },
     loading: false,
   };
 };

@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import LoginView from "../views/LoginView.vue";
+import NotFound from "../views/NotFound.vue";
 import store from "@/store";
 import lodash from "lodash";
 import localStorage from "@/utils/localStorage";
@@ -17,7 +18,7 @@ const router = new VueRouter({
       component: LoginView,
     },
     {
-      path: "/user",
+      path: "/user/:id",
       name: "user",
       meta: {
         requiresAuth: true,
@@ -34,6 +35,19 @@ const router = new VueRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import("../views/Dashboard.vue"),
+    },
+    {
+      path: "/admin",
+      name: "AdminView",
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import("../views/AdminView.vue"),
+    },
+    {
+      // will match everything
+      path: "*",
+      component: NotFound,
     },
   ],
 });

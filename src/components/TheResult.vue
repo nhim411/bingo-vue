@@ -46,48 +46,30 @@
         </div>
       </b-modal>
       <div class="cloumn"><span class="is-size-4">Kết quả quay số:</span></div>
-      <div class="column">
+      <div class="column" style="align-self: start">
         <nav
           class="pagination is-rounded"
           role="navigation"
           aria-label="pagination"
         >
-          <ul class="pagination-list">
-            <li>
-              <a class="pagination-link" aria-label="Page 1" aria-current="page"
-                >1</a
-              >
-            </li>
-            <li>
-              <a class="pagination-link" aria-label="Goto page 2">01</a>
-            </li>
-            <li>
-              <a class="pagination-link" aria-label="Goto page 3">22</a>
-            </li>
-            <li>
-              <a class="pagination-link" aria-label="Goto page 3">32</a>
-            </li>
-            <li>
-              <a class="pagination-link" aria-label="Goto page 3">54</a>
-            </li>
-            <li>
-              <a class="pagination-link" aria-label="Goto page 3">53</a>
-            </li>
-            <li>
-              <a class="pagination-link" aria-label="Goto page 3">63</a>
-            </li>
-            <li>
-              <a class="pagination-link" aria-label="Goto page 3">63</a>
-            </li>
-            <li>
-              <a class="pagination-link" aria-label="Goto page 3">27</a>
-            </li>
-            <li>
-              <a class="pagination-link is-current" aria-label="Goto page 3"
-                >12</a
-              >
-            </li>
-          </ul>
+          <transition-group
+            name="group-list"
+            tag="ul"
+            class="pagination-list"
+            enter-active-class="animated fadeInRight"
+            style="gap: 3px"
+          >
+            <li v-for="(item, index) in listResult" :key="item.id">
+              <a
+                :class="[
+                  'pagination-link',
+                  { 'is-current': index === listResult.length - 1 },
+                ]"
+                :aria-label="item"
+                >{{ item.value }}
+              </a>
+            </li></transition-group
+          >
         </nav>
       </div>
     </div>
@@ -95,6 +77,7 @@
 </template>
 
 <script>
+import { v4 as uuidv4 } from "uuid";
 export default {
   name: "TheResult",
   data() {
@@ -102,12 +85,34 @@ export default {
       isCardModalActive: false,
       total: 0,
       coin: 0,
+      listResult: [],
+      labelPosition: "center",
     };
   },
   computed: {
     getTotalCoin() {
       return this.total * this.coin;
     },
+  },
+  methods: {
+    uniqueKey() {
+      return uuidv4();
+    },
+  },
+  mounted() {
+    let _this = this;
+    let i = 1;
+    setInterval(function () {
+      _this.listResult.push({
+        value: i,
+        id: uuidv4(),
+      });
+      i++;
+      if (i == 21) {
+        i = 1;
+        _this.listResult = [];
+      }
+    }, 1000);
   },
 };
 </script>

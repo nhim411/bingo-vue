@@ -1,5 +1,5 @@
 <template>
-  <div class="admn-view">
+  <div class="admin-view">
     <AppHeader />
     <section>
       <div class="columns mt-4">
@@ -18,17 +18,16 @@
         <div class="column is-8" style="height: 100vh">
           <b-table
             :data="isEmpty ? [] : data"
-            hoverable="true"
+            :hoverable="isHoverable"
             :loading="isLoading"
-            focusable="true"
-            mobile-cards="true"
+            :focusable="true"
+            :mobile-cards="true"
             class="box"
           >
             <div class="title is-centered">Danh sách vòng quay</div>
             <b-table-column
               field="first_name"
               label="Tên vòng quay"
-              :td-attrs="columnTdAttrs"
               v-slot="props"
             >
               {{ props.row.first_name }}
@@ -37,7 +36,6 @@
             <b-table-column
               field="last_name"
               label="Tổng giải thưởng"
-              :td-attrs="columnTdAttrs"
               v-slot="props"
             >
               {{ props.row.last_name }}
@@ -47,7 +45,6 @@
               field="date"
               label="Thời gian quay"
               :th-attrs="dateThAttrs"
-              :td-attrs="columnTdAttrs"
               centered
               v-slot="props"
             >
@@ -58,7 +55,6 @@
               field="date"
               label="Trạng thái"
               :th-attrs="dateThAttrs"
-              :td-attrs="columnTdAttrs"
               centered
               v-slot="props"
             >
@@ -66,11 +62,7 @@
               <span class="tag is-danger"> Đóng </span>
             </b-table-column>
 
-            <b-table-column
-              label="Join"
-              :td-attrs="columnTdAttrs"
-              v-slot="props"
-            >
+            <b-table-column label="Join" v-slot="props">
               <b-button type="is-success" size="is-small">Join now</b-button>
             </b-table-column>
 
@@ -154,21 +146,34 @@ export default {
       hasMobileCards: true,
     };
   },
+  sockets: {
+    connect: function () {
+      console.log("socket connected");
+    },
+    customEmit: function (data) {
+      console.log(
+        'this method was fired by the socket server. eg: io.emit("customEmit", data)',
+        data
+      );
+    },
+  },
 };
 </script>
 
 <style>
 .admin-view {
-  background: #fc466b; /* fallback for old browsers */
+  background: #7f7fd5; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
-    #3f5efb,
-    #fc466b
+    #91eae4,
+    #86a8e7,
+    #7f7fd5
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
     to right,
-    #3f5efb,
-    #fc466b
+    #91eae4,
+    #86a8e7,
+    #7f7fd5
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 </style>

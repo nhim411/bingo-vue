@@ -22,7 +22,7 @@
       <div class="navbar-start" style="width: 100%">
         <a class="navbar-item has-text-centered is-flex-grow-1">
           <marquee behavior="scroll" direction="right" class="header__crolltext"
-            >Sau 5h chưa biết ai giàu hơn ai...</marquee
+            >Demo scroll text...</marquee
           >
         </a>
       </div>
